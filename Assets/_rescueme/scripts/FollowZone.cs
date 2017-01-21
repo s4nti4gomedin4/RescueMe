@@ -21,7 +21,7 @@ public class FollowZone : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other){
 		if (victim) {
-			if (other.CompareTag ("Player")) {
+			if (other.CompareTag ("Bandage")) {
 				victim.SetNewRescuer (other.gameObject);
 				if (FollowingPlayer != null) {
 					FollowingPlayer ();
