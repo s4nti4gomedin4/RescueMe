@@ -19,6 +19,7 @@ public class RescueZone : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		if (other.CompareTag ("Victim")) {
 			if (victimRescue != null) {
+				print ("victimRescue");
 				victimRescue (other.gameObject);
 			}
 		}
