@@ -31,10 +31,6 @@ public class PlayerController : MonoBehaviour {
 		//Movement1 ();
 		Movement2();
 
-
-
-
-
 		loadSpeedMovement ();
 	}
 	public void Movement2(){
