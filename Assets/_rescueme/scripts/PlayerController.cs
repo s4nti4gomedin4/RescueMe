@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
 	Rigidbody rb;
+	AbilityManager abilityManager;
 	public float movingSpeed;
 	public float speed ;
 	public float maxSpeed;
@@ -12,6 +13,7 @@ public class PlayerController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody> ();
+		abilityManager = GetComponent<AbilityManager> ();
 		prevPosition = transform.position;
 	}
 	
@@ -26,6 +28,14 @@ public class PlayerController : MonoBehaviour {
 
 		movingSpeed=Vector3.Distance(prevPosition,transform.position);
 		prevPosition = transform.position;
+
+
+		if (Input.GetButtonDown ("Fire1")) {
+			print ("Someone pressed something");
+			if (abilityManager) {
+				abilityManager.UseAbility ();
+			}
+		}
 		
 	}
 }
