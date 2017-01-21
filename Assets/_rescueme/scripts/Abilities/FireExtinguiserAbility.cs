@@ -15,6 +15,11 @@ public class FireExtinguiserAbility : Ability {
 	}
 
 	public override void UseAbility(){
-		print ("Used the extinguiser");
+		base.UseAbility ();
+		if (canBeUsed) {
+			print ("Used the extinguiser");
+			canBeUsed = false;
+		}
+
 	}
 }

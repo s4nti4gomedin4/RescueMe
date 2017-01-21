@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Flashlight : Ability {
 
+	public GameObject light_;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -15,7 +17,11 @@ public class Flashlight : Ability {
 	}
 
 	public override void UseAbility(){
-		print ("Used the flashlight");
-
+		base.UseAbility ();
+		if (canBeUsed) {
+			print ("Used the flashlight");
+			light_.SetActive (!light_.activeInHierarchy);
+			canBeUsed = false;
+		}
 	}
 }

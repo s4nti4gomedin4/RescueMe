@@ -15,7 +15,11 @@ public class HammerAbility : Ability {
 	}
 
 	public override void UseAbility(){
-		print ("The hammer ability was used");
+		base.UseAbility ();
+		if (canBeUsed) {
+			print ("The hammer ability was used");
+			canBeUsed = false;
+		}
 	}
 
 }

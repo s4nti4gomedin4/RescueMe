@@ -66,9 +66,8 @@ public class PlayerController : MonoBehaviour {
 	}
 	public void CheckAbility(){
 		if (Input.GetButtonDown ("Fire1")) {
-			print ("Someone pressed something");
 			if (abilityManager) {
-				abilityManager.UseAbilityAtIndex (1);
+				abilityManager.UseSelectedAbility ();
 			}
 		}
 

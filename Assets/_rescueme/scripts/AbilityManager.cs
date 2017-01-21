@@ -5,13 +5,13 @@ using UnityEngine;
 public class AbilityManager : MonoBehaviour {
 
 	//public List<GameObject> _abilities = new List<GameObject>();
-	public GameObject[] abilities;
+	public Ability[] abilities;
 	int selectedAbility = 0;
 
 	// Use this for initialization
 	void Start () {
-		foreach (GameObject ability in abilities) {
-			ability.SetActive (false);
+		foreach (Ability ability in abilities) {
+			ability.gameObject.SetActive (false);
 		}
 
 	}
@@ -21,17 +21,12 @@ public class AbilityManager : MonoBehaviour {
 		
 	}
 
-	public void UseAbilityAtIndex(int abilityIndex){
-		//Instantiate<GameObject> (ability, gameObject.transform.position, Quaternion.identity);
-		//ability.SetActive(true);
-		//print(Abilities.Length);
-		//abilities[abilityIndex].SetActive(true);
-		print("An ability was used");
-		abilities[selectedAbility].GetComponent<Ability>().UseAbility();
+	public void UseSelectedAbility(){
+		abilities[selectedAbility].UseAbility();
 	}
 
 	public void NextAbility(bool ascending){
-		abilities [selectedAbility].SetActive (false);
+		abilities [selectedAbility].gameObject.SetActive (false);
 		if (!ascending) {
 			if (selectedAbility <= 0) {
 				selectedAbility = abilities.Length - 1;
@@ -45,7 +40,7 @@ public class AbilityManager : MonoBehaviour {
 				selectedAbility = 0;
 			}
 		}
-		abilities [selectedAbility].SetActive (true);
+		abilities [selectedAbility].gameObject.SetActive (true);
 	}
 
 }

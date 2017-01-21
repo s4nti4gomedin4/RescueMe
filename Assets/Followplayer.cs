@@ -43,7 +43,7 @@ public class Followplayer : MonoBehaviour {
 		float distance = Vector3.Distance (transform.position,target.transform.position);
 		if (distance > 1f) {
 			if(Physics.Raycast(transform.position, directiontoPlayer, out hit, distance)) {
-				print ("name: "+hit.collider.gameObject.name);
+				//print ("name: "+hit.collider.gameObject.name);
 				if (!hit.collider.gameObject.CompareTag ("Player")) {
 					Walls wall = hit.collider.gameObject.GetComponent<Walls> ();
 					if (wall != null) {

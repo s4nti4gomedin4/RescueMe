@@ -15,7 +15,12 @@ public class BandagesAbility : Ability {
 	}
 
 	public override void UseAbility(){
-		print ("Firefighter used a bandage");
+		base.UseAbility ();
+		if (canBeUsed) {
+			print ("Firefighter used a bandage");
+			canBeUsed = false;
+		}
+
 	}
 
 }
