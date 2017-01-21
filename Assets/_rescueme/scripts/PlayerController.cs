@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
+	public delegate void PlayerControllerEvents();
+	public static event  PlayerControllerEvents playerStop;
+	public static event  PlayerControllerEvents playerMove;
+	public static event  PlayerControllerEvents playerChangeAbility;
+
+
 	Rigidbody rb;
 
 	AbilityManager abilityManager;
 
-
+	public Animator animator;
 	public float playerSpeed;
-
-	public float speed ;
-	public float maxSpeed;
 	private Vector3 prevPosition;
 
 	//Movement2
@@ -28,10 +31,22 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//Movement1 ();
 		Movement2();
 		CheckAbility ();
 		loadSpeedMovement ();
+		playerSpeed=Mathf.Abs( Input.GetAxis("Vertical"));
+		animator.SetFloat ("speed",playerSpeed);
+		if (playerSpeed == 0) {
+			if (playerStop != null) {
+				playerStop ();
+			}
+
+		} else {
+			if (playerMove != null) {
+				playerMove ();
+			}
+		}
+
 
 	}
 	public void Movement2(){
@@ -46,25 +61,7 @@ public class PlayerController : MonoBehaviour {
 		prevPosition = transform.position;
 	}
 
-	public void Movement1(){
-		float moveX = -Input.GetAxis ("Vertical");
-		float moveZ = Input.GetAxis ("Horizontal");
-		Vector3 forcePosition = new Vector3(moveX,0,moveZ)*speed; 
-		Vector3 force = forcePosition + transform.position;
 
-
-
-
-
-
-	
-
-		transform.LookAt (force);
-		Vector3 newPosition = transform.position;
-		newPosition += transform.forward *Mathf.Abs(moveX+moveZ);
-		rb.MovePosition (newPosition);
-
-	}
 	public void CheckAbility(){
 		if (Input.GetButtonDown ("Fire1")) {
 			if (abilityManager) {
@@ -74,12 +71,19 @@ public class PlayerController : MonoBehaviour {
 
 		if (Input.GetButtonDown ("SwitchLeft")) {
 			if (abilityManager) {
+				if (playerChangeAbility!=null) {
+					playerChangeAbility ();
+				}
+
 				abilityManager.NextAbility (false);
 			}
 		}
 
 		if (Input.GetButtonDown ("SwitchRight")) {
 			if (abilityManager) {
+				if (playerChangeAbility!=null) {
+					playerChangeAbility ();
+				}
 				abilityManager.NextAbility (true);
 			}
 		}
