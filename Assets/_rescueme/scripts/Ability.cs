@@ -14,8 +14,9 @@ public class Ability : MonoBehaviour {
 		
 	}
 
-	public void UseAbility(){
+	public virtual void UseAbility(){
 		// The hero uses an ability. Each one has a different behavior.
+		print ("hmmm");
 	}
 
 }

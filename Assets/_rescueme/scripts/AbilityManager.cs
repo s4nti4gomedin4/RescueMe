@@ -26,7 +26,8 @@ public class AbilityManager : MonoBehaviour {
 		//ability.SetActive(true);
 		//print(Abilities.Length);
 		//abilities[abilityIndex].SetActive(true);
-		abilities[selectedAbility].SetActive(true);
+		print("An ability was used");
+		abilities[selectedAbility].GetComponent<Ability>().UseAbility();
 	}
 
 	public void NextAbility(){
@@ -36,6 +37,7 @@ public class AbilityManager : MonoBehaviour {
 		} else {
 			selectedAbility = 0;
 		}
+		abilities [selectedAbility].SetActive (true);
 	}
 
 }

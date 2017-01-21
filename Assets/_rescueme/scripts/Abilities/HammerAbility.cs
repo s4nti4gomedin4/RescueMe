@@ -14,7 +14,7 @@ public class HammerAbility : Ability {
 		
 	}
 
-	public new void UseAbility(){
+	public override void UseAbility(){
 		print ("The hammer ability was used");
 	}
 

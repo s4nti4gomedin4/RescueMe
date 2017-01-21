@@ -14,7 +14,7 @@ public class Flashlight : Ability {
 		
 	}
 
-	public new void UseAbility(){
+	public override void UseAbility(){
 		print ("Used the flashlight");
 
 	}

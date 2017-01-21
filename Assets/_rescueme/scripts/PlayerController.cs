@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour {
 		prevPosition = transform.position;
 
 
+
+
 		if (Input.GetButtonDown ("Fire1")) {
 			print ("Someone pressed something");
 			if (abilityManager) {
