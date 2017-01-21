@@ -26,6 +26,8 @@ public class FollowZone : MonoBehaviour {
 				if (FollowingPlayer != null) {
 					FollowingPlayer ();
 				}
+			} else if (other.CompareTag ("RescueZone")) {
+				Destroy (transform.parent.gameObject);
 			}
 		}
 	}
