@@ -6,6 +6,7 @@ public class AbilityManager : MonoBehaviour {
 
 	//public List<GameObject> _abilities = new List<GameObject>();
 	public GameObject[] abilities;
+	int selectedAbility = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -24,6 +25,17 @@ public class AbilityManager : MonoBehaviour {
 		//Instantiate<GameObject> (ability, gameObject.transform.position, Quaternion.identity);
 		//ability.SetActive(true);
 		//print(Abilities.Length);
-		abilities[abilityIndex].SetActive(true);
+		//abilities[abilityIndex].SetActive(true);
+		abilities[selectedAbility].SetActive(true);
 	}
+
+	public void NextAbility(){
+		abilities [selectedAbility].SetActive (false);
+		if (selectedAbility < (abilities.Length - 1)) {
+			selectedAbility++;
+		} else {
+			selectedAbility = 0;
+		}
+	}
+
 }

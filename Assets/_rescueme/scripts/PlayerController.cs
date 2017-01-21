@@ -36,6 +36,11 @@ public class PlayerController : MonoBehaviour {
 				abilityManager.UseAbilityAtIndex (1);
 			}
 		}
-		
+
+		if (Input.GetButtonDown ("Jump")) {
+			if (abilityManager) {
+				abilityManager.NextAbility ();
+			}
+		}
 	}
 }
