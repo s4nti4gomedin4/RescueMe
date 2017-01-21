@@ -30,12 +30,20 @@ public class AbilityManager : MonoBehaviour {
 		abilities[selectedAbility].GetComponent<Ability>().UseAbility();
 	}
 
-	public void NextAbility(){
+	public void NextAbility(bool ascending){
 		abilities [selectedAbility].SetActive (false);
-		if (selectedAbility < (abilities.Length - 1)) {
-			selectedAbility++;
+		if (!ascending) {
+			if (selectedAbility <= 0) {
+				selectedAbility = abilities.Length - 1;
+			} else {
+				selectedAbility--;
+			}
 		} else {
-			selectedAbility = 0;
+			if (selectedAbility < (abilities.Length - 1)) {
+				selectedAbility++;
+			} else {
+				selectedAbility = 0;
+			}
 		}
 		abilities [selectedAbility].SetActive (true);
 	}

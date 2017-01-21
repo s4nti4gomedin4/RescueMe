@@ -72,10 +72,17 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 
-		if (Input.GetButtonDown ("Jump")) {
+		if (Input.GetButtonDown ("SwitchLeft")) {
 			if (abilityManager) {
-				abilityManager.NextAbility ();
+				abilityManager.NextAbility (false);
 			}
 		}
+
+		if (Input.GetButtonDown ("SwitchRight")) {
+			if (abilityManager) {
+				abilityManager.NextAbility (true);
+			}
+		}
+
 	}
 }
