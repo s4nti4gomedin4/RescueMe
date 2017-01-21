@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
 		//Movement1 ();
 		Movement2();
-
+		CheckAbility ();
 		loadSpeedMovement ();
 	}
 	public void Movement2(){
@@ -56,6 +56,15 @@ public class PlayerController : MonoBehaviour {
 
 
 
+	
+
+		transform.LookAt (force);
+		Vector3 newPosition = transform.position;
+		newPosition += transform.forward *Mathf.Abs(moveX+moveZ);
+		rb.MovePosition (newPosition);
+
+	}
+	public void CheckAbility(){
 		if (Input.GetButtonDown ("Fire1")) {
 			print ("Someone pressed something");
 			if (abilityManager) {
@@ -68,11 +77,5 @@ public class PlayerController : MonoBehaviour {
 				abilityManager.NextAbility ();
 			}
 		}
-
-		transform.LookAt (force);
-		Vector3 newPosition = transform.position;
-		newPosition += transform.forward *Mathf.Abs(moveX+moveZ);
-		rb.MovePosition (newPosition);
-
 	}
 }
