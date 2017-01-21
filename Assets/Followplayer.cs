@@ -7,6 +7,8 @@ public class Followplayer : MonoBehaviour {
 	public GameObject target;
 	public float rotationDamping = 1;
 	public float movementDamping = 3;
+	public Walls lastWall;
+	public Material transparentMaterial;
 	Vector3 offset;
 
 	void Start() {
@@ -14,8 +16,11 @@ public class Followplayer : MonoBehaviour {
 	}
 
 	void LateUpdate() {
+		Vector3 directiontoPlayer = target.transform.position - transform.position;
 		float currentAngle = transform.eulerAngles.y;
 		float desiredAngle = target.transform.eulerAngles.y;
+
+
 		Quaternion rot = transform.rotation;
 		rot.eulerAngles = new Vector3(0, Mathf.LerpAngle(currentAngle, desiredAngle, Time.deltaTime * rotationDamping), 0);
 		transform.rotation = rot;
@@ -36,23 +41,33 @@ public class Followplayer : MonoBehaviour {
           */
 
 		float distance = Vector3.Distance (transform.position,target.transform.position);
-		Debug.DrawRay (transform.position,target.transform.position.normalized);
-		if(Physics.Raycast(transform.position, target.transform.position.normalized, out hit, distance)) {
-			/*
-              * Set the target location to the location of the hit.
-              */
-
-			print ("name: "+hit.collider.gameObject.name);
-			/*
-              * Modify the target location so that the object is being perfectly aligned with the ground (if it's flat).
-              */
-			//targetLocation += new Vector3(0, transform.localScale.y / 2, 0);
-			/*
-              * Move the object to the target location.
-              */
-			//transform.position = targetLocation;
+		if (distance > 1f) {
+			if(Physics.Raycast(transform.position, directiontoPlayer, out hit, distance)) {
+				print ("name: "+hit.collider.gameObject.name);
+				if (!hit.collider.gameObject.CompareTag ("Player")) {
+					Walls wall = hit.collider.gameObject.GetComponent<Walls> ();
+					if (wall != null) {
+						ResetLastWallMaterial();
+						wall.setMaterial (transparentMaterial);
+						//SetAphaValue(wall.gameObject,0);
+						lastWall = wall;
+					}
+				}else{
+					ResetLastWallMaterial();
+				}
+			}
 		}
-	
 
+	}
+	public void ResetLastWallMaterial(){
+		if(lastWall!=null){
+			lastWall.setOriginalMaterial ();
+			//SetAphaValue(lastWall.gameObject,1);
+		}
+	}
+	public void SetAphaValue(GameObject objectAlpha,float alphaValue){
+		Color originalColor=objectAlpha.GetComponent<Renderer> ().material.color;
+		originalColor.a = alphaValue;
+		objectAlpha.GetComponent<Renderer> ().material.color=originalColor;
 	}
 }
