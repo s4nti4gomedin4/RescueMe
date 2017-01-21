@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour {
 		Movement2();
 		CheckAbility ();
 		loadSpeedMovement ();
+
 	}
 	public void Movement2(){
 		float horizontal = Input.GetAxis("Horizontal") * turningSpeed * Time.deltaTime;
