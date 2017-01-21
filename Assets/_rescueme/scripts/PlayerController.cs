@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour {
 		if (Input.GetButtonDown ("Fire1")) {
 			print ("Someone pressed something");
 			if (abilityManager) {
-				abilityManager.UseAbility ();
+				abilityManager.UseAbilityAtIndex (1);
 			}
 		}
 		

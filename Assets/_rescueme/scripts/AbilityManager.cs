@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class AbilityManager : MonoBehaviour {
 
-	public GameObject ability;
-	public GameObject hammer;
-
+	//public List<GameObject> _abilities = new List<GameObject>();
+	public GameObject[] abilities;
 
 	// Use this for initialization
 	void Start () {
-		ability.SetActive (false);
-		
+		foreach (GameObject ability in abilities) {
+			ability.SetActive (false);
+		}
+
 	}
 	
 	// Update is called once per frame
@@ -19,8 +20,10 @@ public class AbilityManager : MonoBehaviour {
 		
 	}
 
-	public void UseAbility(){
+	public void UseAbilityAtIndex(int abilityIndex){
 		//Instantiate<GameObject> (ability, gameObject.transform.position, Quaternion.identity);
-		ability.SetActive(true);
+		//ability.SetActive(true);
+		//print(Abilities.Length);
+		abilities[abilityIndex].SetActive(true);
 	}
 }
