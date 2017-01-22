@@ -45,7 +45,7 @@ public class GamePlaycontroller : MonoBehaviour {
 		Invoke("PlayRandomHelp",5);
 	}
 	public void PlayRandomAmbientSound(){
-		int randomSoundIndex = Random.Range (1,6);
+		int randomSoundIndex = Random.Range (1,4);
 		Vector3 randomPsotion = new Vector3 (Random.Range(-40,40),0,Random.Range(-40,40));
 		if (ambientSound != null) {
 			ambientSound (randomSoundIndex,randomPsotion);

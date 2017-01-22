@@ -20,7 +20,10 @@ public class Followplayer : MonoBehaviour {
 
 	void OnEnable(){
 		//Explosions.OnExplosion += HandleOnExplosion;
-		TimerRescue.seismographActiveEvent += HandleSeismographActiveEvent;;
+		TimerRescue.seismographActiveEvent += HandleSeismographActiveEvent;
+	}
+	void OnDisable(){
+		TimerRescue.seismographActiveEvent -= HandleSeismographActiveEvent;
 	}
 
 	void Start() {

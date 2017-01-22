@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GameController : MonoBehaviour {
 
@@ -17,6 +18,7 @@ public class GameController : MonoBehaviour {
 	public GameObject objectStart;
 	public GameObject helpObject;
 	public GameObject messageControls;
+	public GameObject buttonPlay;
 	public static int maxVictimToWin=5;
 	RectTransform canvasRect;
 	private Vector3 positionHelp;
@@ -36,9 +38,12 @@ public class GameController : MonoBehaviour {
 		OnStart ();
 	}
 
-
+	public void setButtonFocus(){
+		EventSystem.current.SetSelectedGameObject (buttonPlay);
+	}
 
 	private void OnStart(){
+		setButtonFocus ();
 		HideHelpMessage ();
 		objectStart.SetActive (true);
 		textWin.SetActive (false);
@@ -56,6 +61,7 @@ public class GameController : MonoBehaviour {
 			objectStart.SetActive (false);
 			textLose.SetActive (false);
 			messageControls.SetActive (true);
+			setButtonFocus ();
 		}
 			
 
@@ -97,20 +103,24 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void WinGame(){
+		
 		endMessage.SetActive (true);
 		textWin.SetActive (true);
 		objectStart.SetActive (false);
 		textLose.SetActive (false);
 		messageControls.SetActive (false);
 		StopGame ();
+		setButtonFocus ();
 	}
 	public void LoseGame(){
+		
 		endMessage.SetActive (true);
 		textWin.SetActive (false);
 		objectStart.SetActive (false);
 		textLose.SetActive (true);
 		messageControls.SetActive (false);
 		StopGame ();
+		setButtonFocus ();
 
 	}
 }

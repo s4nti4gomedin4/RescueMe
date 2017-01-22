@@ -41,6 +41,7 @@ public class AudioManager : MonoBehaviour {
 		GamePlaycontroller.helpVictim += PlayHelp;
 		GamePlaycontroller.ambientSound += PlayRandomAmbient;
 		Ability.usingAbility += PlayAbilityUse;
+		TimerRescue.seismographActiveEvent += PlayEarthQuake ;
 	}
 	void OnDisable(){
 		PlayerController.playerMove -=  PlayfootSteps;
@@ -54,8 +55,12 @@ public class AudioManager : MonoBehaviour {
 		TimerRescue.timeHalf -= PlayMusicBackground2;
 		GamePlaycontroller.helpVictim -= PlayHelp;
 		GamePlaycontroller.ambientSound -= PlayRandomAmbient;
+		TimerRescue.seismographActiveEvent -= PlayEarthQuake ;
 
 		Ability.usingAbility -= PlayAbilityUse;
+	}
+	public void PlayEarthQuake(){
+		collapse.Play ();
 	}
 	public void PlayAbilityUse(string abilityName){
 		switch (abilityName) {
@@ -81,21 +86,18 @@ public class AudioManager : MonoBehaviour {
 	public void PlayRandomAmbient(int indexambient,Vector3 position){
 		print ("PlayRandomAmbient");
 		switch (indexambient) {
+	
 		case 1:
-
-			AudioSource.PlayClipAtPoint (collapse.clip,position);
-			break;
-		case 2:
 			AudioSource.PlayClipAtPoint (electricity.clip,position);
 			break;
-		case 3:
+		case 2:
 			AudioSource.PlayClipAtPoint (fire.clip,position);
 			break;
-		case 4:
+		case 3:
 			AudioSource.PlayClipAtPoint (siren.clip,position);
 			break;
 	
-		case 5:
+		case 4:
 			AudioSource.PlayClipAtPoint (wallcolapsing.clip,position);
 			break;
 		}
