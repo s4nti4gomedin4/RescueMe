@@ -8,22 +8,99 @@ public class AudioManager : MonoBehaviour {
 	public AudioSource toolChange;
 	public AudioSource musicBackground;
 	public AudioSource musicBackground2;
+
+	public AudioSource helpMe;
+	public AudioSource help;
+	public AudioSource Iamhere;
+	public AudioSource rescueMe;
+	public AudioSource Thanks;
+
+	public AudioSource collapse;
+	public AudioSource electricity;
+	public AudioSource fire;
+	public AudioSource siren;
+	public AudioSource heart;
+	public AudioSource wallcolapsing;
+
+
 	void OnEnable(){
 		PlayerController.playerMove +=  PlayfootSteps;
 		PlayerController.playerStop +=  StopfootSteps;
+
+		PlayerController.playerMove +=  StopHeart;
+		PlayerController.playerStop +=  PlayHeart;
+
 		AbilityManager.abilityActive += PlayChangetool;
 		GameController.restartGameEvent += PlayMusicBackground;
 		GameController.stopGameEvent += StopMusic;
 		TimerRescue.timeHalf += PlayMusicBackground2;
+		GamePlaycontroller.helpVictim += PlayHelp;
+		GamePlaycontroller.ambientSound += PlayRandomAmbient;
 	}
 	void OnDisable(){
 		PlayerController.playerMove -=  PlayfootSteps;
 		PlayerController.playerStop -=  StopfootSteps;
-		AbilityManager.abilityActive -= PlayChangetool;
-		GameController.restartGameEvent += PlayMusicBackground;
-		GameController.stopGameEvent += StopMusic;
-		TimerRescue.timeHalf -= PlayMusicBackground2;
+		PlayerController.playerMove -=  StopHeart;
+		PlayerController.playerStop -=  PlayHeart;
 
+		AbilityManager.abilityActive -= PlayChangetool;
+		GameController.restartGameEvent -= PlayMusicBackground;
+		GameController.stopGameEvent -= StopMusic;
+		TimerRescue.timeHalf -= PlayMusicBackground2;
+		GamePlaycontroller.helpVictim -= PlayHelp;
+		GamePlaycontroller.ambientSound -= PlayRandomAmbient;
+	}
+
+	public void PlayRandomAmbient(int indexambient,Vector3 position){
+		switch (indexambient) {
+		case 1:
+
+			AudioSource.PlayClipAtPoint (collapse.clip,position);
+			break;
+		case 2:
+			AudioSource.PlayClipAtPoint (electricity.clip,position);
+			break;
+		case 3:
+			AudioSource.PlayClipAtPoint (fire.clip,position);
+			break;
+		case 4:
+			AudioSource.PlayClipAtPoint (siren.clip,position);
+			break;
+	
+		case 5:
+			AudioSource.PlayClipAtPoint (wallcolapsing.clip,position);
+			break;
+		}
+	}
+	public void StopHeart(){
+		heart.Stop ();
+	}
+	public void PlayHeart(){
+		heart.Play ();
+	}
+
+	public void PlayHelp(int indexhelp,Vector3 position){
+		switch (indexhelp) {
+		case 1:
+			
+			AudioSource.PlayClipAtPoint (helpMe.clip,position);
+			break;
+		case 2:
+			AudioSource.PlayClipAtPoint (help.clip,position);
+			break;
+		case 3:
+			AudioSource.PlayClipAtPoint (Iamhere.clip,position);
+			break;
+		case 4:
+			AudioSource.PlayClipAtPoint (rescueMe.clip,position);
+			break;
+		case 5:
+			AudioSource.PlayClipAtPoint (Thanks.clip,position);
+			break;
+		}
+	}
+	public void PlayThanks(){
+		Thanks.Play ();
 	}
 	public void StopMusic(){
 		StopfootSteps();
@@ -31,16 +108,18 @@ public class AudioManager : MonoBehaviour {
 		StopMusicBackground ();
 	}
 	public void PlayMusicBackground2(){
-		StopMusicBackground ();
-		if(!musicBackground2.isPlaying)
-		musicBackground2.Play();
+
+		if (!musicBackground2.isPlaying) {
+			PlayMusicBackground ();
+			musicBackground2.Play();
+		}
+
 	}
 	public void StopMusicBackground2(){
 		musicBackground2.Stop();
 	}
 	public void PlayMusicBackground(){
 		musicBackground.Play();
-		StopMusicBackground2 ();
 	}
 	public void StopMusicBackground(){
 		musicBackground.Stop();
