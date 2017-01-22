@@ -10,11 +10,13 @@ public class Ability : MonoBehaviour {
 	public float cooldown;
 	public bool canBeUsed;
 	public string abilityName;
-
+	public GameObject abilityObject;
+	public float abilityTimeToDisplay;
 
 	// Use this for initialization
 	void Start () {
 		canBeUsed = true;
+		abilityObject.SetActive (false);
 	}
 	
 	// Update is called once per frame
@@ -25,6 +27,11 @@ public class Ability : MonoBehaviour {
 	void ResetCooldown(){
 		canBeUsed = true;
 	}
+	void ResetEffect(){
+		if (abilityObject) {
+			abilityObject.SetActive (false);
+		}
+	}
 
 	public virtual void UseAbility(){
 		// The hero uses an ability. Each one has a different behavior.
@@ -34,6 +41,8 @@ public class Ability : MonoBehaviour {
 			if (usingAbility != null) {
 				usingAbility (abilityName);
 			}
+			abilityObject.SetActive (true);
+			Invoke ("ResetEffect", abilityTimeToDisplay);
 		} else {
 			print ("ability is on cooldown");
 		}

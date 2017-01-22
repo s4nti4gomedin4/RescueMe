@@ -18,6 +18,9 @@ public class AbilityManager : MonoBehaviour {
 		//desactivate all abilities
 		foreach (Ability ability in abilities) {
 			ability.gameObject.SetActive (false);
+			if (ability.abilityObject) {
+				ability.abilityObject.SetActive (false);
+			}
 		}
 
 	}
@@ -32,6 +35,9 @@ public class AbilityManager : MonoBehaviour {
 	public void NextAbility(bool ascending){
 		if (selectedAbility != null) {
 			selectedAbility.gameObject.SetActive (false);
+			if (selectedAbility.abilityObject) {
+				selectedAbility.abilityObject.SetActive (false);
+			}
 		}
 
 		if (!ascending) {
