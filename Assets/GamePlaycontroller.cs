@@ -33,6 +33,7 @@ public class GamePlaycontroller : MonoBehaviour {
 
 	}
 	public void StopGame(){
+		CancelInvoke ();
 		StopAllCoroutines ();
 	}
 	public void PlayRandomHelp(){

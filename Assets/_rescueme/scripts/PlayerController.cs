@@ -21,9 +21,29 @@ public class PlayerController : MonoBehaviour {
 	//Movement2
 	public float movementSpeed = 10;
 	public float turningSpeed = 60;
+	public bool playing;
+
+
+	void OnEnable(){
+		GameController.restartGameEvent += RestartGame;
+		GameController.stopGameEvent += StopGame;
+	}
+	void OnDisable(){
+		GameController.restartGameEvent -= RestartGame;
+		GameController.stopGameEvent -= StopGame;
+	}
+
+	void RestartGame(){
+		playing = true;
+	}
+	void StopGame(){
+		playing = false;
+	}
+
 
 	// Use this for initialization
 	void Start () {
+		playing = false;
 		rb = GetComponent<Rigidbody> ();
 		abilityManager = GetComponent<AbilityManager> ();
 		prevPosition = transform.position;
@@ -31,6 +51,9 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (!playing) {
+			return;
+		}
 		Movement2();
 		CheckAbility ();
 		loadSpeedMovement ();

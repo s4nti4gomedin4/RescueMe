@@ -22,6 +22,10 @@ public class AudioManager : MonoBehaviour {
 	public AudioSource heart;
 	public AudioSource wallcolapsing;
 
+	public AudioSource abilityAxe;
+	public AudioSource abilityExtinguicher;
+	public AudioSource abilityLinterna;
+
 
 	void OnEnable(){
 		PlayerController.playerMove +=  PlayfootSteps;
@@ -36,6 +40,7 @@ public class AudioManager : MonoBehaviour {
 		TimerRescue.timeHalf += PlayMusicBackground2;
 		GamePlaycontroller.helpVictim += PlayHelp;
 		GamePlaycontroller.ambientSound += PlayRandomAmbient;
+		Ability.usingAbility += PlayAbilityUse;
 	}
 	void OnDisable(){
 		PlayerController.playerMove -=  PlayfootSteps;
@@ -49,9 +54,32 @@ public class AudioManager : MonoBehaviour {
 		TimerRescue.timeHalf -= PlayMusicBackground2;
 		GamePlaycontroller.helpVictim -= PlayHelp;
 		GamePlaycontroller.ambientSound -= PlayRandomAmbient;
+
+		Ability.usingAbility -= PlayAbilityUse;
+	}
+	public void PlayAbilityUse(string abilityName){
+		switch (abilityName) {
+		case "axe":
+			abilityAxe.Play();
+			break;
+		case "extinguisher":
+			abilityExtinguicher.Play ();
+			break;
+		case "bandages":
+			
+			break;
+		case "flashlight":
+			abilityLinterna.Play ();
+			break;
+		default:
+
+
+			break;
+		}
 	}
 
 	public void PlayRandomAmbient(int indexambient,Vector3 position){
+		print ("PlayRandomAmbient");
 		switch (indexambient) {
 		case 1:
 
@@ -73,9 +101,12 @@ public class AudioManager : MonoBehaviour {
 		}
 	}
 	public void StopHeart(){
+		if(heart.isPlaying)
 		heart.Stop ();
 	}
 	public void PlayHeart(){
+		print ("PlayHeart");
+		if(!heart.isPlaying)
 		heart.Play ();
 	}
 
@@ -106,6 +137,19 @@ public class AudioManager : MonoBehaviour {
 		StopfootSteps();
 		StopMusicBackground2 ();
 		StopMusicBackground ();
+		helpMe.Stop ();
+		help.Stop ();
+		Iamhere.Stop ();
+		rescueMe.Stop ();
+	    Thanks.Stop ();
+		collapse.Stop ();
+		electricity.Stop ();
+		fire.Stop ();
+		siren.Stop ();
+		heart.Stop ();
+		wallcolapsing.Stop ();
+
+
 	}
 	public void PlayMusicBackground2(){
 

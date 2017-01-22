@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour {
 	public GameObject textLose;
 	public GameObject objectStart;
 	public GameObject helpObject;
+	public GameObject messageControls;
 	public static int maxVictimToWin=5;
 	RectTransform canvasRect;
 	private Vector3 positionHelp;
@@ -34,16 +35,30 @@ public class GameController : MonoBehaviour {
 		canvasRect =canvas.GetComponent<RectTransform>();
 		OnStart ();
 	}
+
+
+
 	private void OnStart(){
 		HideHelpMessage ();
 		objectStart.SetActive (true);
 		textWin.SetActive (false);
 		textLose.SetActive (false);
 		endMessage.SetActive (true);
+		messageControls.SetActive (false);
 	}
 	public void OnPlay(){
 		print ("OnPlay");
-		RestartGame ();
+		if (messageControls.activeInHierarchy) {
+			RestartGame ();
+		} else {
+			endMessage.SetActive (true);
+			textWin.SetActive (false);
+			objectStart.SetActive (false);
+			textLose.SetActive (false);
+			messageControls.SetActive (true);
+		}
+			
+
 	}
 	void Update(){
 		if (helpObject.activeInHierarchy) {
@@ -54,8 +69,6 @@ public class GameController : MonoBehaviour {
 	public void ShowHelpMessage(int indexambient,Vector3 position){
 		
 		if (Random.Range (0, 4) == 2) {
-
-
 		position.y = 0;
 		helpObject.SetActive (true);
 		positionHelp = position;
@@ -88,6 +101,7 @@ public class GameController : MonoBehaviour {
 		textWin.SetActive (true);
 		objectStart.SetActive (false);
 		textLose.SetActive (false);
+		messageControls.SetActive (false);
 		StopGame ();
 	}
 	public void LoseGame(){
@@ -95,6 +109,7 @@ public class GameController : MonoBehaviour {
 		textWin.SetActive (false);
 		objectStart.SetActive (false);
 		textLose.SetActive (true);
+		messageControls.SetActive (false);
 		StopGame ();
 
 	}
