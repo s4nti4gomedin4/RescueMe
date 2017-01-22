@@ -41,6 +41,7 @@ public class GameController : MonoBehaviour {
 	public void RestartGame(){
 		m_TimerRescue.timerOn = true;
 		m_TimerRescue.timeElapse = 0;
+		m_TimerRescue.seismographActiveState = 0;
 		endMessage.SetActive (false);
 		m_RescueUI.rescue = 0;
 		if (restartGameEvent != null) {
