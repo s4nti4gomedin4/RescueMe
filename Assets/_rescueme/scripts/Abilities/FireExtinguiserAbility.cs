@@ -21,12 +21,12 @@ public class FireExtinguiserAbility : Ability {
 			RaycastHit hit;
 			Vector3 dir = transform.parent.forward;
 
-			Physics.Raycast (transform.parent.position, dir, out hit, 5);
+			/*Physics.Raycast (transform.parent.position, dir, out hit, 5);
 			if (hit.collider) {
 				if (hit.collider.CompareTag ("FlamableObject")) {
 					hit.collider.GetComponent<FireScript>().TakeDamage(1);
 				}
-			}
+			}*/
 
 			canBeUsed = false;
 		}

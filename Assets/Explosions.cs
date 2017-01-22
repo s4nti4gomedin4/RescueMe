@@ -32,6 +32,8 @@ public class Explosions : MonoBehaviour {
 		if (!hayExplosion) {
 			hayExplosion = true;
 			Instantiate (explosionVfx, new Vector3(Random.Range(-24, 9), 0, Random.Range(0, 15)), Quaternion.identity);
+			Instantiate (explosionVfx, new Vector3(Random.Range(-24, 9), 0, Random.Range(0, 15)), Quaternion.identity);
+			Instantiate (explosionVfx, new Vector3(Random.Range(-24, 9), 0, Random.Range(-12, 0)), Quaternion.identity);
 			Instantiate (explosionVfx, new Vector3(Random.Range(-24, 9), 0, Random.Range(-12, 0)), Quaternion.identity);
 			Instantiate (explosionVfx, new Vector3(Random.Range(9, 41), 0, Random.Range(-12, 0)), Quaternion.identity);
 		

@@ -24,4 +24,8 @@ public class FireScript : MonoBehaviour {
 			Destroy (gameObject);
 		}
 	}
+
+	public void OnParticleCollision(GameObject other){
+		TakeDamage (1);
+	}
 }
