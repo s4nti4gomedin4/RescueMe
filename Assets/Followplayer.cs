@@ -19,7 +19,8 @@ public class Followplayer : MonoBehaviour {
 	private float decreaseFactor = 1.0f;
 
 	void OnEnable(){
-		RandomExplosions.OnExplosion += HandleOnExplosion;
+		//Explosions.OnExplosion += HandleOnExplosion;
+		TimerRescue.seismographActiveEvent += HandleSeismographActiveEvent;;
 	}
 
 	void Start() {
@@ -93,5 +94,10 @@ public class Followplayer : MonoBehaviour {
 	public void HandleOnExplosion(float shakeDuration, float shakeIntensity){
 		this.shakeDuration = shakeDuration;
 		this.shakeAmount = shakeIntensity;
+	}
+
+	public void HandleSeismographActiveEvent(){
+		this.shakeDuration = 1.0f;
+		this.shakeAmount = 0.8f;
 	}
 }
