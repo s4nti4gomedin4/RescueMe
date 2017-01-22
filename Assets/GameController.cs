@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour {
 	public GameObject endMessage;
 	public GameObject textWin;
 	public GameObject textLose;
+	public GameObject objectStart;
 	public static int maxVictimToWin=5;
 
 	void OnEnable(){
@@ -25,7 +26,13 @@ public class GameController : MonoBehaviour {
 		RescueUI.allVictimsRescued -= WinGame;
 	}
 	void Start(){
-		RestartGame ();
+		OnStart ();
+	}
+	private void OnStart(){
+		objectStart.SetActive (true);
+		textWin.SetActive (false);
+		textLose.SetActive (false);
+		endMessage.SetActive (true);
 	}
 	public void OnPlay(){
 		print ("OnPlay");
@@ -50,12 +57,14 @@ public class GameController : MonoBehaviour {
 	public void WinGame(){
 		endMessage.SetActive (true);
 		textWin.SetActive (true);
+		objectStart.SetActive (false);
 		textLose.SetActive (false);
 		StopGame ();
 	}
 	public void LoseGame(){
 		endMessage.SetActive (true);
 		textWin.SetActive (false);
+		objectStart.SetActive (false);
 		textLose.SetActive (true);
 		StopGame ();
 

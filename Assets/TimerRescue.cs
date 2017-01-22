@@ -7,6 +7,7 @@ public class TimerRescue : MonoBehaviour {
 
 	public delegate void  TimerRescueEvent();
 	public static event TimerRescueEvent timeEnd;
+	public static event TimerRescueEvent timeHalf;
 
 	public Image mImagetimer;
 	public  int secondsToDead;
@@ -34,6 +35,9 @@ public class TimerRescue : MonoBehaviour {
 				mImagetimer.sprite = sprites [3];
 			}else if (percent <55) {
 				mImagetimer.sprite = sprites [4];
+				if (timeHalf != null) {
+					timeHalf ();
+				}
 			}else if (percent < 66) {
 				mImagetimer.sprite = sprites [5];
 			}else if (percent < 77) {

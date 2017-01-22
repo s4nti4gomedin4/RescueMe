@@ -19,14 +19,13 @@ public class RescueUI : MonoBehaviour {
 	}
 	void RescueVictim(){
 		rescue++;
-		victimRescueText.text = string.Format ("{0}/{1}",rescue,GameController.maxVictimToWin);
 	}
 
 	// Use this for initialization
 	void Start () {
 		rescue = 0;
 		victimRescueText = GetComponent<Text> ();
-		victimRescueText.text = string.Format ("{0}/{1}",rescue,GameController.maxVictimToWin);
+
 	}
 	void Update(){
 		if (rescue == GameController.maxVictimToWin) {
@@ -34,6 +33,7 @@ public class RescueUI : MonoBehaviour {
 				allVictimsRescued ();
 			}
 		}
+		victimRescueText.text = string.Format ("{0}/{1}",rescue,GameController.maxVictimToWin);
 	}
 
 }
