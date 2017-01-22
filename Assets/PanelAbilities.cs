@@ -10,9 +10,47 @@ public class PanelAbilities : MonoBehaviour {
 	public Image bandage;
 	public Image flashlight;
 
+	void OnEnable(){
+		AbilityManager.abilityActive += ShowHability ;
+	}
+	void OnDisable(){
+		AbilityManager.abilityActive-= ShowHability ;
+	}
+	public void ShowHability(string abilityName){
+		switch (abilityName) {
+		case "axe":
+			axe.gameObject.SetActive (true);
+			extinguisher.gameObject.SetActive (false);
+			bandage.gameObject.SetActive (false);
+			flashlight.gameObject.SetActive (false);
+			break;
+		case "extinguisher":
+			axe.gameObject.SetActive (false);
+			extinguisher.gameObject.SetActive (true);
+			bandage.gameObject.SetActive (false);
+			flashlight.gameObject.SetActive (false);
+			break;
+		case "bandages":
+			axe.gameObject.SetActive (false);
+			extinguisher.gameObject.SetActive (false);
+			bandage.gameObject.SetActive (true);
+			flashlight.gameObject.SetActive (false);
+			break;
+		case "flashlight":
+			axe.gameObject.SetActive (false);
+			extinguisher.gameObject.SetActive (false);
+			bandage.gameObject.SetActive (false);
+			flashlight.gameObject.SetActive (true);
+			break;
+		default:
+			axe.gameObject.SetActive (false);
+			extinguisher.gameObject.SetActive (false);
+			bandage.gameObject.SetActive (false);
+			flashlight.gameObject.SetActive (false);
 
-
-
+			break;
+		}
+	}
 	// Use this for initialization
 	void Start () {
 		

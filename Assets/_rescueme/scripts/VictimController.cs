@@ -24,7 +24,6 @@ public class VictimController : MonoBehaviour {
 				Vector3 newPosition = transform.forward * speed * Time.deltaTime;
 				Vector3 force = newPosition + transform.position;
 				rb.MovePosition (force);
-
 			}
 		}
 	}

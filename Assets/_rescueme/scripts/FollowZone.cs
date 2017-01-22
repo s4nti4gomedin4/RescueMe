@@ -6,6 +6,7 @@ public class FollowZone : MonoBehaviour {
 
 	public delegate void FollowZoneEvents();
 	public static event FollowZoneEvents FollowingPlayer;
+	public static event FollowZoneEvents victimSave;
 
 	VictimController victim;
 
@@ -27,6 +28,9 @@ public class FollowZone : MonoBehaviour {
 					FollowingPlayer ();
 				}
 			} else if (other.CompareTag ("RescueZone")) {
+				if (victimSave != null) {
+					victimSave ();
+				}
 				Destroy (transform.parent.gameObject);
 			}
 		}

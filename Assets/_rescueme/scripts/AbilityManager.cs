@@ -4,43 +4,56 @@ using UnityEngine;
 
 public class AbilityManager : MonoBehaviour {
 
+	public delegate void AbilityManagerEvent(string abilityName);
+	public static event AbilityManagerEvent abilityActive;
+
 	//public List<GameObject> _abilities = new List<GameObject>();
 	public Ability[] abilities;
-	int selectedAbility = 0;
+	int indexAbility = 0;
+	public Ability selectedAbility;
 
 	// Use this for initialization
 	void Start () {
+		indexAbility = 0;
+		//desactivate all abilities
 		foreach (Ability ability in abilities) {
 			ability.gameObject.SetActive (false);
 		}
 
 	}
-	
-	// Update is called once per frame
-	void Update () {
 
-	}
 
 	public void UseSelectedAbility(){
-		abilities[selectedAbility].UseAbility();
+		if (selectedAbility != null) {
+			selectedAbility.UseAbility();
+		}
 	}
 
 	public void NextAbility(bool ascending){
-		abilities [selectedAbility].gameObject.SetActive (false);
+		if (selectedAbility != null) {
+			selectedAbility.gameObject.SetActive (false);
+		}
+
 		if (!ascending) {
-			if (selectedAbility <= 0) {
-				selectedAbility = abilities.Length - 1;
+			if (indexAbility <= 0) {
+				indexAbility = abilities.Length - 1;
 			} else {
-				selectedAbility--;
+				indexAbility--;
 			}
 		} else {
-			if (selectedAbility < (abilities.Length - 1)) {
-				selectedAbility++;
+			if (indexAbility < (abilities.Length - 1)) {
+				indexAbility++;
 			} else {
-				selectedAbility = 0;
+				indexAbility = 0;
 			}
 		}
-		abilities [selectedAbility].gameObject.SetActive (true);
+		selectedAbility = abilities [indexAbility];
+		selectedAbility.gameObject.SetActive (true);
+
+		if (abilityActive != null) {
+			abilityActive (selectedAbility.abilityName);
+		}
+
 	}
 
 }
