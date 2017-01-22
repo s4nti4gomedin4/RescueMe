@@ -6,10 +6,12 @@ public class VictimController : MonoBehaviour {
 
 	BoxCollider myCollider;
 	public float speed = 0.1f;
-	public float searchRadius = 2f;
+	public float searchRadius = 3f;
 	Rigidbody rb;
-
+	public Animator m_animator;
+	public bool isFollowing;
 	GameObject rescuer;
+
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody> ();
@@ -23,9 +25,14 @@ public class VictimController : MonoBehaviour {
 			if (distance > searchRadius) {
 				Vector3 newPosition = transform.forward * speed * Time.deltaTime;
 				Vector3 force = newPosition + transform.position;
+				force.y = transform.position.y;
 				rb.MovePosition (force);
+				isFollowing = true;
 			}
+		} else {
+			isFollowing = false;
 		}
+		m_animator.SetBool ("following",isFollowing);
 	}
 
 	public void SetNewRescuer(GameObject newRescuer){

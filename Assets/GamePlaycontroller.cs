@@ -56,6 +56,7 @@ public class GamePlaycontroller : MonoBehaviour {
 			var newVictim = Instantiate (prefabVictim);
 			newVictim.transform.SetParent (panelVictim.transform);
 			newVictim.transform.position = victimsPosition [i].position;
+			newVictim.transform.rotation = victimsPosition [i].rotation;
 		}
 
 	}
