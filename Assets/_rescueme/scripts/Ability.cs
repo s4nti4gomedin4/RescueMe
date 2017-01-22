@@ -41,7 +41,9 @@ public class Ability : MonoBehaviour {
 			if (usingAbility != null) {
 				usingAbility (abilityName);
 			}
-			abilityObject.SetActive (true);
+			if (abilityObject) {
+				abilityObject.SetActive (true);
+			}
 			Invoke ("ResetEffect", abilityTimeToDisplay);
 		} else {
 			print ("ability is on cooldown");
