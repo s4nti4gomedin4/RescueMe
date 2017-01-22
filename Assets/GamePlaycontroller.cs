@@ -25,10 +25,12 @@ public class GamePlaycontroller : MonoBehaviour {
 		GameController.stopGameEvent -= StopGame;
 	}
 	public void RestartGame(){
+		CancelInvoke ();
 		CreateVictims ();
 		ResetPlayerPosition ();
 		PlayRandomHelp ();
 		PlayRandomAmbientSound();
+
 	}
 	public void StopGame(){
 		StopAllCoroutines ();

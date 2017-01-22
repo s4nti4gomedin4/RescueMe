@@ -7,7 +7,7 @@ public class GameController : MonoBehaviour {
 	public delegate  void  GameControllerEvents();
 	public static event GameControllerEvents restartGameEvent;
 	public static event GameControllerEvents stopGameEvent;
-
+	public Canvas canvas;
 
 	public TimerRescue m_TimerRescue;
 	public RescueUI m_RescueUI;
@@ -15,20 +15,27 @@ public class GameController : MonoBehaviour {
 	public GameObject textWin;
 	public GameObject textLose;
 	public GameObject objectStart;
+	public GameObject helpObject;
 	public static int maxVictimToWin=5;
+	RectTransform canvasRect;
+	private Vector3 positionHelp;
 
 	void OnEnable(){
 		TimerRescue.timeEnd += LoseGame;
 		RescueUI.allVictimsRescued += WinGame;
+		GamePlaycontroller.helpVictim += ShowHelpMessage;
 	}
 	void OnDisable(){
 		TimerRescue.timeEnd -= LoseGame;
 		RescueUI.allVictimsRescued -= WinGame;
+		GamePlaycontroller.helpVictim -= ShowHelpMessage;
 	}
 	void Start(){
+		canvasRect =canvas.GetComponent<RectTransform>();
 		OnStart ();
 	}
 	private void OnStart(){
+		HideHelpMessage ();
 		objectStart.SetActive (true);
 		textWin.SetActive (false);
 		textLose.SetActive (false);
@@ -37,6 +44,27 @@ public class GameController : MonoBehaviour {
 	public void OnPlay(){
 		print ("OnPlay");
 		RestartGame ();
+	}
+	void Update(){
+		if (helpObject.activeInHierarchy) {
+			helpObject.transform.position =RectTransformUtility.WorldToScreenPoint (Camera.main,positionHelp);
+		}
+	}
+
+	public void ShowHelpMessage(int indexambient,Vector3 position){
+		
+		if (Random.Range (0, 4) == 2) {
+
+
+		position.y = 0;
+		helpObject.SetActive (true);
+		positionHelp = position;
+	
+		Invoke("HideHelpMessage",1);
+		}
+	}
+	public void HideHelpMessage(){
+		helpObject.SetActive (true);
 	}
 	public void RestartGame(){
 		m_TimerRescue.timerOn = true;

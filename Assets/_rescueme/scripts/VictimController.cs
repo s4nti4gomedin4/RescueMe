@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class VictimController : MonoBehaviour {
 
@@ -11,16 +12,19 @@ public class VictimController : MonoBehaviour {
 	public Animator m_animator;
 	public bool isFollowing;
 	GameObject rescuer;
+	NavMeshAgent agent;
 
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody> ();
+		agent=GetComponent<NavMeshAgent> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (rescuer) {
-			gameObject.transform.LookAt (rescuer.transform);
+			agent.SetDestination (rescuer.transform.position);
+			/*gameObject.transform.LookAt (rescuer.transform);
 			float distance = Vector3.Distance (rescuer.transform.position, gameObject.transform.position);
 			if (distance > searchRadius) {
 				Vector3 newPosition = transform.forward * speed * Time.deltaTime;
@@ -28,7 +32,7 @@ public class VictimController : MonoBehaviour {
 				force.y = transform.position.y;
 				rb.MovePosition (force);
 				isFollowing = true;
-			}
+			}*/
 		} else {
 			isFollowing = false;
 		}
